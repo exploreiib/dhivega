@@ -6,6 +6,8 @@
 import { isStandalone } from '../../../base/browser/browser.js';
 import { mainWindow } from '../../../base/browser/window.js';
 import { VSBuffer, decodeBase64, encodeBase64 } from '../../../base/common/buffer.js';
+
+
 import { Emitter } from '../../../base/common/event.js';
 import { Disposable, IDisposable } from '../../../base/common/lifecycle.js';
 import { parse } from '../../../base/common/marshalling.js';
@@ -88,7 +90,7 @@ class ServerKeyedAESCrypto implements ISecretStorageCrypto {
 
 		// Base64 encode the result and store the ciphertext, the key, and the IV in localStorage
 		// Note that the clientKey and IV don't need to be secret
-		const result = new Uint8Array([...clientKey, ...iv, ...new Uint8Array(cipherText)]);
+		const result = new Uint8Array([...clientKey, ...iv, ...new Uint8Array(cipherText as unknown as ArrayBuffer)]);
 		return encodeBase64(VSBuffer.wrap(result));
 	}
 
@@ -107,11 +109,11 @@ class ServerKeyedAESCrypto implements ISecretStorageCrypto {
 		const cipherText = dataUint8Array.slice(keyLength + AESConstants.IV_LENGTH);
 
 		// Do the decryption and parse the result as JSON
-		const key = await this.getKey(clientKey.buffer);
+		const key = await this.getKey(new Uint8Array(clientKey.buffer));
 		const decrypted = await mainWindow.crypto.subtle.decrypt(
-			{ name: AESConstants.ALGORITHM as const, iv: iv.buffer },
+			{ name: AESConstants.ALGORITHM as const, iv: iv.buffer as unknown as ArrayBuffer },
 			key,
-			cipherText.buffer
+			cipherText.buffer as unknown as ArrayBuffer
 		);
 
 		return new TextDecoder().decode(new Uint8Array(decrypted));

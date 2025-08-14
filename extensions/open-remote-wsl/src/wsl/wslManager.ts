@@ -109,9 +109,9 @@ export class WSLManager {
 		const cmd = cp.spawn(wslBinary, args, { windowsHide: true, windowsVerbatimArguments: true });
 
 		const stdoutDataEmitter = new EventEmitter<Buffer>();
-		const stdoutData: Buffer[] = [];
+		const stdoutData: Uint8Array[] = [];
 		const stderrDataEmitter = new EventEmitter<Buffer>();
-		const stderrData: Buffer[] = [];
+		const stderrData: Uint8Array[] = [];
 		cmd.stdout.on('data', (data: Buffer) => {
 			stdoutData.push(data);
 			stdoutDataEmitter.fire(data);

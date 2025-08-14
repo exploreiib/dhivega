@@ -13,6 +13,8 @@ import { ISecretStorageService } from '../../../../platform/secrets/common/secre
 import { IStorageService, StorageScope, StorageTarget } from '../../../../platform/storage/common/storage.js';
 import { IResolvedValue } from '../../../services/configurationResolver/common/configurationResolverExpression.js';
 
+
+
 const MCP_ENCRYPTION_KEY_NAME = 'mcpEncryptionKey';
 const MCP_ENCRYPTION_KEY_ALGORITHM = 'AES-GCM';
 const MCP_ENCRYPTION_KEY_LEN = 256;
@@ -136,10 +138,11 @@ export class McpRegistryInputStorage extends Disposable {
 
 			const toSeal = JSON.stringify(this._record.value.unsealedSecrets);
 			const iv = crypto.getRandomValues(new Uint8Array(MCP_ENCRYPTION_IV_LENGTH));
+
 			const encrypted = await crypto.subtle.encrypt(
 				{ name: MCP_ENCRYPTION_KEY_ALGORITHM, iv: iv.buffer },
 				key,
-				new TextEncoder().encode(toSeal).buffer,
+				new TextEncoder().encode(toSeal).buffer as unknown as ArrayBuffer,
 			);
 
 			const enc = encodeBase64(VSBuffer.wrap(new Uint8Array(encrypted)));
@@ -163,9 +166,9 @@ export class McpRegistryInputStorage extends Disposable {
 			const encrypted = decodeBase64(this._record.value.secrets.value);
 
 			const decrypted = await crypto.subtle.decrypt(
-				{ name: MCP_ENCRYPTION_KEY_ALGORITHM, iv: iv.buffer },
+				{ name: MCP_ENCRYPTION_KEY_ALGORITHM, iv: iv.buffer as unknown as ArrayBuffer },
 				key,
-				encrypted.buffer,
+				encrypted.buffer as unknown as ArrayBuffer,
 			);
 
 			const unsealedSecrets = JSON.parse(new TextDecoder().decode(decrypted));

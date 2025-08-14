@@ -6,6 +6,8 @@
 import { VSBuffer } from '../../../base/common/buffer.js';
 import * as extHostProtocol from './extHost.protocol.js';
 
+
+
 class ArrayBufferSet {
 	public readonly buffers: ArrayBuffer[] = [];
 
@@ -37,7 +39,7 @@ export function serializeWebviewMessage(
 			} else if (ArrayBuffer.isView(value)) {
 				const type = getTypedArrayType(value);
 				if (type) {
-					const index = arrayBuffers.add(value.buffer);
+					const index = arrayBuffers.add(value.buffer as unknown as ArrayBuffer);
 					return {
 						$$vscode_array_buffer_reference$$: true,
 						index,
@@ -56,7 +58,7 @@ export function serializeWebviewMessage(
 		const serializedMessage = JSON.stringify(message, replacer);
 
 		const buffers = arrayBuffers.buffers.map(arrayBuffer => {
-			const bytes = new Uint8Array(arrayBuffer);
+			const bytes = new Uint8Array(arrayBuffer as unknown as ArrayBuffer);
 			return VSBuffer.wrap(bytes);
 		});
 
