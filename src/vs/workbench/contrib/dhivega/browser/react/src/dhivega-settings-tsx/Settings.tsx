@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------*/
 
 import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react'; // Added useRef import just in case it was missed, though likely already present
-import { ProviderName, SettingName, displayInfoOfSettingName, providerNames, VoidStatefulModelInfo, customSettingNamesOfProvider, RefreshableProviderName, refreshableProviderNames, displayInfoOfProviderName, nonlocalProviderNames, localProviderNames, GlobalSettingName, featureNames, displayInfoOfFeatureName, isProviderNameDisabled, FeatureName, hasDownloadButtonsOnModelsProviderNames, subTextMdOfProviderName } from '../../../../common/dhivegaSettingsTypes.js'
+import { ProviderName, SettingName, displayInfoOfSettingName, providerNames, DhivegaStatefulModelInfo, customSettingNamesOfProvider, RefreshableProviderName, refreshableProviderNames, displayInfoOfProviderName, nonlocalProviderNames, localProviderNames, GlobalSettingName, featureNames, displayInfoOfFeatureName, isProviderNameDisabled, FeatureName, hasDownloadButtonsOnModelsProviderNames, subTextMdOfProviderName } from '../../../../common/dhivegaSettingsTypes.js'
 import ErrorBoundary from '../sidebar-tsx/ErrorBoundary.js'
 import { DhivegaButtonBgDarken, DhivegaCustomDropdownBox, DhivegaInputBox2, DhivegaSimpleInputBox, DhivegaSwitch } from '../util/inputs.js'
 import { useAccessor, useIsDark, useIsOptedOut, useRefreshModelListener, useRefreshModelState, useSettingsState } from '../util/services.js'
@@ -391,7 +391,7 @@ export const ModelDump = ({ filteredProviders }: { filteredProviders?: ProviderN
 	const [errorString, setErrorString] = useState('');
 
 	// a dump of all the enabled providers' models
-	const modelDump: (VoidStatefulModelInfo & { providerName: ProviderName, providerEnabled: boolean })[] = []
+	const modelDump: (DhivegaStatefulModelInfo & { providerName: ProviderName, providerEnabled: boolean })[] = []
 
 	// Use either filtered providers or all providers
 	const providersToShow = filteredProviders || providerNames;
@@ -631,7 +631,7 @@ const ProviderSetting = ({ providerName, settingName, subTextMd }: { providerNam
 
 	return <ErrorBoundary>
 		<div className='my-1'>
-			<VoidSimpleInputBox
+			<DhivegaSimpleInputBox
 				value={settingValue}
 				onChangeValue={handleChangeValue}
 				placeholder={`${settingTitle} (${placeholder})`}
@@ -744,7 +744,7 @@ export const SettingsForProvider = ({ providerName, showProviderTitle, showProvi
 }
 
 
-export const VoidProviderSettings = ({ providerNames }: { providerNames: ProviderName[] }) => {
+export const DhivegaProviderSettings = ({ providerNames }: { providerNames: ProviderName[] }) => {
 	return <>
 		{providerNames.map(providerName =>
 			<SettingsForProvider key={providerName} providerName={providerName} showProviderTitle={true} showProviderSuggestions={true} />
@@ -1064,12 +1064,12 @@ export const Settings = () => {
 		if (t === 'Chats') {
 			// Export chat threads
 			dataStr = JSON.stringify(chatThreadsService.state, null, 2)
-			downloadName = 'void-chats.json'
+			downloadName = 'dhivega-chats.json'
 		}
 		else if (t === 'Settings') {
 			// Export user settings
 			dataStr = JSON.stringify(dhivegaSettingsService.state, null, 2)
-			downloadName = 'void-settings.json'
+			downloadName = 'dhivega-settings.json'
 		}
 		else {
 			dataStr = ''
@@ -1195,7 +1195,7 @@ export const Settings = () => {
 										<OllamaSetupInstructions sayWeAutoDetect={true} />
 									</div>
 
-									<VoidProviderSettings providerNames={localProviderNames} />
+									<DhivegaProviderSettings providerNames={localProviderNames} />
 								</ErrorBoundary>
 							</div>
 
@@ -1205,7 +1205,7 @@ export const Settings = () => {
 									<h2 className={`text-3xl mb-2`}>Main Providers</h2>
 									<h3 className={`text-dhivega-fg-3 mb-2`}>{`Dhivega can access models from Anthropic, OpenAI, OpenRouter, and more.`}</h3>
 
-									<VoidProviderSettings providerNames={nonlocalProviderNames} />
+									<DhivegaProviderSettings providerNames={nonlocalProviderNames} />
 								</ErrorBoundary>
 							</div>
 
@@ -1496,7 +1496,7 @@ export const Settings = () => {
 									<h4 className={`text-dhivega-fg-3 mb-4`}>
 										<ChatMarkdownRender inPTag={true} string={`
 System instructions to include with all AI requests.
-Alternatively, place a \`.voidrules\` file in the root of your workspace.
+Alternatively, place a \`.dhivegarules\` file in the root of your workspace.
 								`} chatMessageLocation={undefined} />
 									</h4>
 									<ErrorBoundary>
