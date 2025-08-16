@@ -46,7 +46,7 @@ if [ ! -f "appimagetool" ]; then
 fi
 
 # Delete any existing AppImage to avoid bloating the build
-rm -f Void-x86_64.AppImage
+rm -f Dhivega-x86_64.AppImage
 
 # Create build Dockerfile
 echo "Creating build Dockerfile..."
@@ -106,14 +106,14 @@ mkdir -p VoidApp.AppDir/usr/bin VoidApp.AppDir/usr/lib VoidApp.AppDir/usr/share/
 find . -maxdepth 1 ! -name VoidApp.AppDir ! -name "." ! -name ".." -exec cp -r {} VoidApp.AppDir/usr/bin/ \; && \
 cp void.png VoidApp.AppDir/ && \
 echo "[Desktop Entry]" > VoidApp.AppDir/void.desktop && \
-echo "Name=Void" >> VoidApp.AppDir/void.desktop && \
+echo "Name=Dhivega" >> VoidApp.AppDir/void.desktop && \
 echo "Comment=Open source AI code editor." >> VoidApp.AppDir/void.desktop && \
 echo "GenericName=Text Editor" >> VoidApp.AppDir/void.desktop && \
 echo "Exec=void %F" >> VoidApp.AppDir/void.desktop && \
 echo "Icon=void" >> VoidApp.AppDir/void.desktop && \
 echo "Type=Application" >> VoidApp.AppDir/void.desktop && \
 echo "StartupNotify=false" >> VoidApp.AppDir/void.desktop && \
-echo "StartupWMClass=Void" >> VoidApp.AppDir/void.desktop && \
+echo "StartupWMClass=Dhivega" >> VoidApp.AppDir/void.desktop && \
 echo "Categories=TextEditor;Development;IDE;" >> VoidApp.AppDir/void.desktop && \
 echo "MimeType=application/x-void-workspace;" >> VoidApp.AppDir/void.desktop && \
 echo "Keywords=void;" >> VoidApp.AppDir/void.desktop && \
@@ -134,7 +134,7 @@ echo "Icon=void" >> VoidApp.AppDir/void.desktop && \
 chmod +x VoidApp.AppDir/void.desktop && \
 cp VoidApp.AppDir/void.desktop VoidApp.AppDir/usr/share/applications/ && \
 echo "[Desktop Entry]" > VoidApp.AppDir/void-url-handler.desktop && \
-echo "Name=Void - URL Handler" > VoidApp.AppDir/void-url-handler.desktop && \
+echo "Name=Dhivega - URL Handler" > VoidApp.AppDir/void-url-handler.desktop && \
 echo "Comment=Open source AI code editor." > VoidApp.AppDir/void-url-handler.desktop && \
 echo "GenericName=Text Editor" > VoidApp.AppDir/void-url-handler.desktop && \
 echo "Exec=void --open-url %U" > VoidApp.AppDir/void-url-handler.desktop && \
@@ -159,10 +159,10 @@ chmod -R 755 VoidApp.AppDir && \
 strip --strip-unneeded VoidApp.AppDir/usr/bin/void
 
 ls -la VoidApp.AppDir/ && \
-ARCH=x86_64 ./appimagetool -n VoidApp.AppDir Void-x86_64.AppImage
+ARCH=x86_64 ./appimagetool -n VoidApp.AppDir Dhivega-x86_64.AppImage
 '
 
 # Clean up
 rm -rf VoidApp.AppDir .dockerignore appimagetool
 
-echo "AppImage creation complete! Your AppImage is: Void-x86_64.AppImage"
+echo "AppImage creation complete! Your AppImage is: Dhivega-x86_64.AppImage"

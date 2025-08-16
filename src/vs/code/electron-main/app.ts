@@ -125,14 +125,14 @@ import ErrorTelemetry from '../../platform/telemetry/electron-main/errorTelemetr
 
 // in theory this is not allowed
 // ignore the eslint errors below
-import { IMetricsService } from '../../workbench/contrib/void/common/metricsService.js';
-import { IVoidUpdateService } from '../../workbench/contrib/void/common/voidUpdateService.js';
-import { MetricsMainService } from '../../workbench/contrib/void/electron-main/metricsMainService.js';
-import { VoidMainUpdateService } from '../../workbench/contrib/void/electron-main/voidUpdateMainService.js';
-import { LLMMessageChannel } from '../../workbench/contrib/void/electron-main/sendLLMMessageChannel.js';
-import { VoidSCMService } from '../../workbench/contrib/void/electron-main/voidSCMMainService.js';
-import { IVoidSCMService } from '../../workbench/contrib/void/common/voidSCMTypes.js';
-import { MCPChannel } from '../../workbench/contrib/void/electron-main/mcpChannel.js';
+import { IMetricsService } from '../../workbench/contrib/dhivega/common/metricsService.js';
+import { IDhivegaUpdateService } from '../../workbench/contrib/dhivega/common/dhivegaUpdateService.js';
+import { MetricsMainService } from '../../workbench/contrib/dhivega/electron-main/metricsMainService.js';
+import { DhivegaMainUpdateService } from '../../workbench/contrib/dhivega/electron-main/dhivegaUpdateMainService.js';
+import { LLMMessageChannel } from '../../workbench/contrib/dhivega/electron-main/sendLLMMessageChannel.js';
+import { DhivegaSCMService } from '../../workbench/contrib/dhivega/electron-main/dhivegaSCMMainService.js';
+import { IDhivegaSCMService } from '../../workbench/contrib/dhivega/common/dhivegaSCMTypes.js';
+import { MCPChannel } from '../../workbench/contrib/dhivega/electron-main/mcpChannel.js';
 /**
  * The main VS Code application. There will only ever be one instance,
  * even if the user starts many instances (e.g. from the command line).
@@ -1101,10 +1101,10 @@ export class CodeApplication extends Disposable {
 			services.set(ITelemetryService, NullTelemetryService);
 		}
 
-		// Void main process services (required for services with a channel for comm between browser and electron-main (node))
+		// Dhivega main process services (required for services with a channel for comm between browser and electron-main (node))
 		services.set(IMetricsService, new SyncDescriptor(MetricsMainService, undefined, false));
-		services.set(IVoidUpdateService, new SyncDescriptor(VoidMainUpdateService, undefined, false));
-		services.set(IVoidSCMService, new SyncDescriptor(VoidSCMService, undefined, false));
+		services.set(IDhivegaUpdateService, new SyncDescriptor(DhivegaMainUpdateService, undefined, false));
+		services.set(IDhivegaSCMService, new SyncDescriptor(DhivegaSCMService, undefined, false));
 
 		// Default Extensions Profile Init
 		services.set(IExtensionsProfileScannerService, new SyncDescriptor(ExtensionsProfileScannerService, undefined, true));
@@ -1238,21 +1238,21 @@ export class CodeApplication extends Disposable {
 
 		// Void - use loggerChannel as reference
 		const metricsChannel = ProxyChannel.fromService(accessor.get(IMetricsService), disposables);
-		mainProcessElectronServer.registerChannel('void-channel-metrics', metricsChannel);
+		mainProcessElectronServer.registerChannel('dhivega-channel-metrics', metricsChannel);
 
-		const voidUpdatesChannel = ProxyChannel.fromService(accessor.get(IVoidUpdateService), disposables);
-		mainProcessElectronServer.registerChannel('void-channel-update', voidUpdatesChannel);
+		const dhivegaUpdatesChannel = ProxyChannel.fromService(accessor.get(IDhivegaUpdateService), disposables);
+		mainProcessElectronServer.registerChannel('dhivega-channel-update', dhivegaUpdatesChannel);
 
 		const sendLLMMessageChannel = new LLMMessageChannel(accessor.get(IMetricsService));
-		mainProcessElectronServer.registerChannel('void-channel-llmMessage', sendLLMMessageChannel);
+		mainProcessElectronServer.registerChannel('dhivega-channel-llmMessage', sendLLMMessageChannel);
 
-		// Void added this
-		const voidSCMChannel = ProxyChannel.fromService(accessor.get(IVoidSCMService), disposables);
-		mainProcessElectronServer.registerChannel('void-channel-scm', voidSCMChannel);
+		// Dhivega added this
+		const dhivegaSCMChannel = ProxyChannel.fromService(accessor.get(IDhivegaSCMService), disposables);
+		mainProcessElectronServer.registerChannel('dhivega-channel-scm', dhivegaSCMChannel);
 
-		// Void added this
+		// Dhivega added this
 		const mcpChannel = new MCPChannel();
-		mainProcessElectronServer.registerChannel('void-channel-mcp', mcpChannel);
+		mainProcessElectronServer.registerChannel('dhivega-channel-mcp', mcpChannel);
 
 		// Extension Host Debug Broadcasting
 		const electronExtensionHostDebugBroadcastChannel = new ElectronExtensionHostDebugBroadcastChannel(accessor.get(IWindowsMainService));

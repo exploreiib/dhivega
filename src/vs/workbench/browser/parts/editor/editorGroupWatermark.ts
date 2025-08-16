@@ -24,8 +24,8 @@ import { IWindowOpenable } from '../../../../platform/window/common/window.js';
 import { splitRecentLabel } from '../../../../base/common/labels.js';
 import { IViewsService } from '../../../services/views/common/viewsService.js';
 
-/* eslint-disable */ // Void
-import { VOID_CTRL_K_ACTION_ID, VOID_CTRL_L_ACTION_ID } from '../../../contrib/void/browser/actionIDs.js';
+/* eslint-disable */ // Dhivega
+import { DHIVEGA_CTRL_K_ACTION_ID, DHIVEGA_CTRL_L_ACTION_ID } from '../../../contrib/dhivega/browser/actionIDs.js';
 import { VIEWLET_ID as REMOTE_EXPLORER_VIEWLET_ID } from '../../../contrib/remote/browser/remoteExplorer.js';
 /* eslint-enable */
 
@@ -181,7 +181,7 @@ export class EditorGroupWatermark extends Disposable {
 			this.currentDisposables.clear();
 
 
-			// Void - if the workbench is empty, show open
+			// Dhivega - if the workbench is empty, show open
 			if (this.contextService.getWorkbenchState() === WorkbenchState.EMPTY) {
 
 				// Create a flex container for buttons with vertical direction
@@ -244,7 +244,7 @@ export class EditorGroupWatermark extends Disposable {
 							const { name, parentPath } = splitRecentLabel(fullPath);
 
 							const linkSpan = $('span');
-							linkSpan.classList.add('void-link')
+							linkSpan.classList.add('dhivega-link')
 							linkSpan.style.display = 'flex'
 							linkSpan.style.gap = '4px'
 							linkSpan.style.padding = '8px'
@@ -283,8 +283,8 @@ export class EditorGroupWatermark extends Disposable {
 			}
 			else {
 
-				// show them Void keybindings
-				const keys = this.keybindingService.lookupKeybinding(VOID_CTRL_L_ACTION_ID);
+				// show them Dhivega keybindings
+				const keys = this.keybindingService.lookupKeybinding(DHIVEGA_CTRL_L_ACTION_ID);
 				const dl = append(voidIconBox, $('dl'));
 				const dt = append(dl, $('dt'));
 				dt.textContent = 'Chat'
@@ -295,7 +295,7 @@ export class EditorGroupWatermark extends Disposable {
 				this.currentDisposables.add(label);
 
 
-				const keys2 = this.keybindingService.lookupKeybinding(VOID_CTRL_K_ACTION_ID);
+				const keys2 = this.keybindingService.lookupKeybinding(DHIVEGA_CTRL_K_ACTION_ID);
 				const dl2 = append(voidIconBox, $('dl'));
 				const dt2 = append(dl2, $('dt'));
 				dt2.textContent = 'Quick Edit'
@@ -307,7 +307,7 @@ export class EditorGroupWatermark extends Disposable {
 
 				// const keys3 = this.keybindingService.lookupKeybinding('workbench.action.openGlobalKeybindings');
 				// const button3 = append(recentsBox, $('button'));
-				// button3.textContent = `Void Settings`
+				// button3.textContent = `Dhivega Settings`
 				// button3.style.display = 'block'
 				// button3.style.marginLeft = 'auto'
 				// button3.style.marginRight = 'auto'
@@ -317,7 +317,7 @@ export class EditorGroupWatermark extends Disposable {
 				// if (keys3)
 				// 	label3.set(keys3);
 				// button3.onclick = () => {
-				// 	this.commandService.executeCommand(VOID_OPEN_SETTINGS_ACTION_ID)
+				// 	this.commandService.executeCommand(DHIVEGA_OPEN_SETTINGS_ACTION_ID)
 				// }
 				// this.currentDisposables.add(label3);
 

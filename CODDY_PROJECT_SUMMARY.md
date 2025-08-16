@@ -169,8 +169,8 @@ npm run watch
 ## Support and Resources
 
 ### Original Void Resources
-- **Repository:** https://github.com/voideditor/void
-- **Documentation:** https://github.com/voideditor/void/blob/main/VOID_CODEBASE_GUIDE.md
+- **Repository:** https://github.com/yourusername/dhivega
+- **Documentation:** https://github.com/yourusername/dhivega/blob/main/DHIVEGA_CODEBASE_GUIDE.md
 - **Community:** https://discord.gg/RSNjgaugJs
 
 ### VSCode Resources

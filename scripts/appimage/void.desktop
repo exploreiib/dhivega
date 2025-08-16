@@ -1,12 +1,12 @@
 [Desktop Entry]
-Name=Void
+Name=Dhivega
 Comment=Open source AI code editor.
 GenericName=Text Editor
 Exec=void %F
 Icon=void
 Type=Application
 StartupNotify=false
-StartupWMClass=Void
+StartupWMClass=Dhivega
 Categories=TextEditor;Development;IDE;
 MimeType=application/x-void-workspace;
 Keywords=void;
