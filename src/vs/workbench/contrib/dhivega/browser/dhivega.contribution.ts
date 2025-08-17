@@ -64,6 +64,9 @@ import './fileService.js'
 // register source control management
 import './dhivegaSCMService.js'
 
+// register dhivega rules setup workbench contribution
+import './dhivegaRulesSetupWorkbenchContrib.js'
+
 // ---------- common (unclear if these actually need to be imported, because they're already imported wherever they're used) ----------
 
 // llmMessage
