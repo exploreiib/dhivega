@@ -61,7 +61,7 @@ const DhivegaIcon = () => {
 		return () => d.dispose()
 	}, [])
 
-	return <div ref={divRef} className='@@void-dhivega-icon' />
+	return <div ref={divRef} className='dhivega-dhivega-icon' />
 }
 
 const FADE_DURATION_MS = 2000

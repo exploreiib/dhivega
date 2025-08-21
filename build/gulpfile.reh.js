@@ -346,9 +346,9 @@ function packageTask(type, platform, arch, sourceFolderName, destinationFolderNa
 		let web = [];
 		if (type === 'reh-web') {
 			web = [
-				'resources/server/favicon.ico',
-				'resources/server/code-192.png',
-				'resources/server/code-512.png',
+				'resources/server/dhivega-favicon.ico',
+				'resources/server/dhivega-192.png',
+				'resources/server/dhivegae-512.png',
 				'resources/server/manifest.json'
 			].map(resource => gulp.src(resource, { base: '.' }).pipe(rename(resource)));
 		}

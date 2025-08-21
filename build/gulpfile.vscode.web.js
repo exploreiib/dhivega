@@ -178,11 +178,11 @@ function packageTask(sourceFolderName, destinationFolderName) {
 			.pipe(filter(['**', '!**/package-lock.json']))
 			.pipe(util.cleanNodeModules(path.join(__dirname, '.webignore')));
 
-		const favicon = gulp.src('resources/server/favicon.ico', { base: 'resources/server' });
+		const favicon = gulp.src('resources/server/dhivega-favicon.ico', { base: 'resources/server' });
 		const manifest = gulp.src('resources/server/manifest.json', { base: 'resources/server' });
 		const pwaicons = es.merge(
-			gulp.src('resources/server/code-192.png', { base: 'resources/server' }),
-			gulp.src('resources/server/code-512.png', { base: 'resources/server' })
+			gulp.src('resources/server/dhivega-192.png', { base: 'resources/server' }),
+			gulp.src('resources/server/dhivega-512.png', { base: 'resources/server' })
 		);
 
 		const all = es.merge(

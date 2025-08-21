@@ -104,7 +104,7 @@ export class EditorGroupWatermark extends Disposable {
 		super();
 
 		const elements = h('.editor-group-watermark', [
-			h('.letterpress@icon'),
+			h('.letterpress.dhivega-dhivega-icon@icon'),
 			h('.shortcuts@shortcuts'),
 		]);
 
