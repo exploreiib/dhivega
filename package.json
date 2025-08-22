@@ -149,6 +149,7 @@
     "@types/gulp-svgmin": "^1.2.1",
     "@types/http-proxy-agent": "^2.0.1",
     "@types/kerberos": "^1.1.2",
+    "@types/minimatch": "^3.0.3",
     "@types/minimist": "^1.2.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^22.0.0",

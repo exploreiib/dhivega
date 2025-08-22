@@ -10,7 +10,7 @@ import {
 } from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import minimatch from 'minimatch';
+const minimatch = require('minimatch');
 import { Utils } from 'vscode-uri';
 import { findPreferredPM } from './preferred-pm';
 import { readScripts } from './readScripts';

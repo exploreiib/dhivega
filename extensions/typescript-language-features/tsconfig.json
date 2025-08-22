@@ -5,7 +5,8 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"types": [
-			"node"
+			"node",
+			"mocha"
 		]
 	},
 	"include": [
@@ -15,5 +16,8 @@
 		"../../src/vscode-dts/vscode.proposed.codeActionRanges.d.ts",
 		"../../src/vscode-dts/vscode.proposed.multiDocumentHighlightProvider.d.ts",
 		"../../src/vscode-dts/vscode.proposed.workspaceTrust.d.ts"
+	],
+	"exclude": [
+		"src/test/**/*"
 	]
 }

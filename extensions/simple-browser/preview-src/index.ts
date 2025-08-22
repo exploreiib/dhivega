@@ -3,6 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+declare function acquireVsCodeApi(): any;
+
 import { onceDocumentLoaded } from './events';
 
 const vscode = acquireVsCodeApi();
